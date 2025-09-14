@@ -3,43 +3,65 @@
 Local-first DevOps homelab designed to simulate production-like environments on a single Ubuntu laptop using **k3d**.  
 The goal: practice modern DevOps & SRE workflows (GitOps, Helm, observability, DevSecOps, chaos) with minimal cost.
 
+---
+
 ## Project architecture
 
 ```text
 realworld-devops-homelab/
-├─ apps/ # Application services
-│  ├─ frontend/ # React/Vue UI
-│  ├─ orders-api/ # Handles orders
-│  ├─ payments-api/ # Handles payments (FastAPI/Flask)
-│  ├─ catalog-api/ # Catalog service
-│  ├─ ai-worker/ # Worker (rules engine or ML inference)
-│  └─ shared/ # Shared libs, contracts, OpenAPI schemas
+├─ apps/
+│  ├─ frontend/
+│  ├─ orders-api/
+│  ├─ payments-api/
+│  ├─ catalog-api/
+│  ├─ ai-worker/
+│  └─ shared/
 ├─ deploy/
-│  ├─ compose/ # Local bring-up for dev/prod
+│  ├─ compose/
 │  │  ├─ docker-compose.dev.yml
 │  │  └─ docker-compose.prod.yml
 │  ├─ k8s/
-│  │  ├─ base/ # Common manifests (namespace, RBAC, CRDs)
+│  │  ├─ base/
 │  │  ├─ overlays/
-│  │  │  ├─ dev/ # Local dev (k3d cluster)
-│  │  │  └─ prod/ # Local prod (separate k3d cluster)
-│  │  ├─ argo/ # ArgoCD App-of-Apps definitions
-│  │  └─ rollouts/ # Argo Rollouts configs (canary, blue/green)
-│  └─ charts/ # Helm charts for apps & infra
-│     ├─ frontend/
-│     ├─ orders-api/
-│     ├─ payments-api/
-│     ├─ catalog-api/
-│     ├─ ai-worker/
-│     ├─ traefik/ # Helm chart for Traefik ingress
-│     ├─ rabbitmq/ # Legacy MQ (queue-based)
-│     ├─ redpanda/ # Kafka-compatible broker
-│     ├─ prometheus/ # Monitoring
-│     ├─ grafana/ # Dashboards
-│     ├─ loki/ # Logs
-│     └─ otel-collector/ # Distributed tracing
+│  │  │  ├─ dev/
+│  │  │  └─ prod/
+│  │  ├─ argo/
+│  │  └─ rollouts/
+│  └─ charts/
+├─ ci-cd/
+│  └─ github-actions/
+├─ observability/
+│  ├─ prometheus/
+│  ├─ grafana/
+│  ├─ loki-promtail/
+│  ├─ tracing/
+│  └─ alerts/
+├─ mq/
+│  ├─ rabbitmq/
+│  └─ redpanda/
+├─ security/
+│  ├─ trivy/
+│  ├─ syft/
+│  ├─ cosign/
+│  ├─ opa-gatekeeper/
+│  └─ vault/
+├─ infra/
+│  └─ terraform/
+├─ chaos/
+│  └─ litmus/
+├─ registry/
+│  ├─ k3d-registry.yaml
+│  └─ harbor/
+├─ docs/
+│  ├─ diagrams/
+│  ├─ runbook.md
+│  ├─ architecture.md
+│  ├─ showcase.md
+│  └─ security.md
+├─ .github/workflows/
+├─ README.md
+└─ LICENSE
 ...
-
 
 ## ASCII architecture - Local only (dev + prod)
 
