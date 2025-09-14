@@ -7,7 +7,6 @@ The goal: practice modern DevOps & SRE workflows (GitOps, Helm, observability, D
 
 ## Project architecture
 
-
 realworld-devops-homelab/
 ├─ apps/ # Application services
 │ ├─ frontend/ # React/Vue UI
@@ -91,12 +90,6 @@ realworld-devops-homelab/
 ├─ .github/workflows/ # Meta checks (linting, SAST, SBOM, etc.)
 ├─ README.md
 └─ LICENSE
-
----
-
-## ASCII architecture - Local only (dev + prod)
-
-
 
 ---
 
