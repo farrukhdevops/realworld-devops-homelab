@@ -1,27 +1,46 @@
-# OS
+# -------------------------------
+# Global OS junk
+# -------------------------------
 .DS_Store
 Thumbs.db
 
+# -------------------------------
 # Python
+# -------------------------------
 __pycache__/
 *.py[cod]
 .venv/
 
-# Node
+# -------------------------------
+# Node.js
+# -------------------------------
 node_modules/
 dist/
 
+# -------------------------------
 # Docker
+# -------------------------------
 *.log
 docker-compose.override.yml
 
+# -------------------------------
 # Terraform
+# -------------------------------
 .terraform/
 *.tfstate
 *.tfstate.*
 .terraform.lock.hcl
 
+# -------------------------------
 # Kubernetes
+# -------------------------------
 .kube/
 kubeconfig
-!docs/progress.log
+
+# -------------------------------
+# Overrides for project docs
+# (always include documentation)
+# -------------------------------
+!docs/
+!docs/**/*.md
+!docs/**/*.log
