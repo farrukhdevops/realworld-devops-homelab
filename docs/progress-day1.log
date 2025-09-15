@@ -1,0 +1,23 @@
+Day 1 (Sep 15, 2025)
+
+Achievements:
+- Rebuilt project skeleton from scratch.
+- Created frontend (React + Vite) with Dockerfile.
+- Created 3 FastAPI services (orders-api, payments-api, catalog-api) each with health endpoint + Dockerfiles.
+- Created ai-worker (simple Python background task) + Dockerfile.
+- Created shared/ placeholder for future libraries.
+- Created docker-compose.dev.yml to run all services together.
+- Verified services:
+  - orders-api → http://localhost:8081/health
+  - payments-api → http://localhost:8082/health
+  - catalog-api → http://localhost:8083/health
+  - frontend → http://localhost:3000
+  - ai-worker → logs confirm running
+- Resolved networking/port conflicts by removing orphan containers.
+
+Next steps (Day 2):
+- Add real business logic to APIs (orders, payments, catalog).
+- Connect frontend to APIs (fetch data, display).
+- Introduce persistence (SQLite or Postgres).
+- Add logging, metrics, monitoring.
+- Prepare production docker-compose & Helm templates.

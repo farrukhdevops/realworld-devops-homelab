@@ -1,0 +1,30 @@
+services:
+  frontend:
+    build: ../../apps/frontend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ../../apps/frontend:/app
+    command: npm run dev -- --host 0.0.0.0 --port 3000
+
+  orders-api:
+    build: ../../apps/orders-api
+    ports:
+      - "8081:8080"
+    command: uvicorn app:app --host 0.0.0.0 --port 8080 --reload
+
+  payments-api:
+    build: ../../apps/payments-api
+    ports:
+      - "8082:8080"
+    command: uvicorn app:app --host 0.0.0.0 --port 8080 --reload
+
+  catalog-api:
+    build: ../../apps/catalog-api
+    ports:
+      - "8083:8080"
+    command: uvicorn app:app --host 0.0.0.0 --port 8080 --reload
+
+  ai-worker:
+    build: ../../apps/ai-worker
+    command: python worker.py
