@@ -1,0 +1,10 @@
+Day 1 (Sep 15, 2025):
+
+- Rebuilt project skeleton from scratch.
+- Added frontend (React + Vite) with Dockerfile.
+- Added orders-api, payments-api, catalog-api (FastAPI skeletons with health endpoints).
+- Added ai-worker (simple Python background worker).
+- Added shared/ placeholder for future libs.
+- Created docker-compose.dev.yml to run all services together.
+- Verified services with curl health checks and frontend browser access.
+- Saved logs of what was built and tested.
