@@ -1,11 +1,16 @@
+---
 name: CI Lint
-on:
-  pull_request:
-    branches: [ dev ]
+on: [push, pull_request]
+
 jobs:
   yamllint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - name: Lint YAML
         uses: ibiqlik/action-yamllint@v3
+        with:
+          format: parsable
+          strict: false
+          no_warnings: false
