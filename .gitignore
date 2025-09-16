@@ -44,3 +44,5 @@ kubeconfig
 !docs/
 !docs/**/*.md
 !docs/**/*.log
+.venv-yaml/
+apps/orders-api/app.py.bak
