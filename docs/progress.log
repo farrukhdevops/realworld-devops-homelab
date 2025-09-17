@@ -1,1 +1,2 @@
 2025-09-16 | Day 2 | feat/orders-core: added orders-api core endpoints + tests (in-memory store)
+2025-09-17 | Day 3 | RabbitMQ integration, ai-worker, metrics, logs
