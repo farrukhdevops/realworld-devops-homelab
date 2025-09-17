@@ -1,4 +1,5 @@
----
+version: "3.8"
+
 services:
   frontend:
     build: ../../apps/frontend
@@ -6,26 +7,53 @@ services:
       - "3000:3000"
     volumes:
       - ../../apps/frontend:/app
-    command: npm run dev -- --host 0.0.0.0 --port 3000
+    depends_on:
+      - orders-api
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER:-guest}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASS:-guest}
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    healthcheck:
+      test: ["CMD", "rabbitmqctl", "status"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
 
   orders-api:
-    build: ../../apps/orders-api
+    build:
+      context: ../../apps/orders-api
     ports:
       - "8081:8080"
+    environment:
+      RABBITMQ_HOST: rabbitmq
+      RABBITMQ_PORT: 5672
+      RABBITMQ_USER: ${RABBITMQ_USER:-guest}
+      RABBITMQ_PASS: ${RABBITMQ_PASS:-guest}
+      RABBITMQ_QUEUE: orders
     command: uvicorn app:app --host 0.0.0.0 --port 8080 --reload
-
-  payments-api:
-    build: ../../apps/payments-api
-    ports:
-      - "8082:8080"
-    command: uvicorn app:app --host 0.0.0.0 --port 8080 --reload
-
-  catalog-api:
-    build: ../../apps/catalog-api
-    ports:
-      - "8083:8080"
-    command: uvicorn app:app --host 0.0.0.0 --port 8080 --reload
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
 
   ai-worker:
-    build: ../../apps/ai-worker
+    build:
+      context: ../../apps/ai-worker
     command: python worker.py
+    environment:
+      RABBITMQ_HOST: rabbitmq
+      RABBITMQ_PORT: 5672
+      RABBITMQ_USER: ${RABBITMQ_USER:-guest}
+      RABBITMQ_PASS: ${RABBITMQ_PASS:-guest}
+      RABBITMQ_QUEUE: orders
+      WORKER_OUTFILE: /data/processed.log
+    volumes:
+      - ./data/ai-worker:/data
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
