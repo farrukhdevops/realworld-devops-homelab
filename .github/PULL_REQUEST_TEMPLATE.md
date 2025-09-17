@@ -1,12 +1,12 @@
 ## Summary
-- What changed and why
+Brief description of the change.
 
-## Testing
-- Steps to test locally
-
-## Docs
-- Files updated
+## Verification steps
+1. Run locally
+2. Expected outputs
 
 ## Checklist
-- [ ] CI passed
-- [ ] Docs updated
+- [ ] Lint passes
+- [ ] Tests pass
+- [ ] Docker image builds locally
+- [ ] Trivy scan reviewed

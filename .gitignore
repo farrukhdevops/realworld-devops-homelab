@@ -46,3 +46,4 @@ kubeconfig
 !docs/**/*.log
 .venv-yaml/
 apps/orders-api/app.py.bak
+deploy/compose/.env
