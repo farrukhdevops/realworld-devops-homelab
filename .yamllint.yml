@@ -1,11 +1,10 @@
 extends: default
 
 ignore: |
-  apps/frontend/node_modules
   **/node_modules
-  backup_day*
   venv
   .venv
+  backup_day*
 
 rules:
   line-length:
